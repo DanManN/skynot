@@ -1,0 +1,3 @@
+[submodule "PrefabPainter"]
+	path = PrefabPainter
+	url = git@github.com:Roland09/PrefabPainter.git
