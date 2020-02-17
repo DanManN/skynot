@@ -1,0 +1,10 @@
+- [ ] Crowd simulator
+	- [x] Enviorment
+	- [x] NavMesh (carve)
+	- [x] Agent prefab
+	- [ ] Mouse movement
+	- [ ] Agent Selection
+- [ ] Crowd collision
+- [ ] Extra credit
+	- [ ] Adversarial Agent
+	- [ ] Extract to graph [Yanshi]
