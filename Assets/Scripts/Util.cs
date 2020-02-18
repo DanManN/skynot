@@ -24,4 +24,13 @@ public static class Util
         return -right();
     }
 
+    public static Vector3 vert(float disp)
+    {
+        return Vector3.up * disp;
+    }
+
+    public static float pow2(float x)
+    {
+        return x * x;
+    }
 }
