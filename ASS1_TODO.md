@@ -2,8 +2,8 @@
 	- [x] Enviorment
 	- [x] NavMesh (carve)
 	- [x] Agent prefab
-	- [ ] Mouse movement
-	- [ ] Agent Selection
+	- [x] Mouse movement
+	- [x] Agent Selection
 - [ ] Crowd collision
 - [ ] Extra credit
 	- [ ] Adversarial Agent
