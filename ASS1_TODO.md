@@ -1,10 +1,15 @@
-- [ ] Crowd simulator
+- [x] Crowd simulator
 	- [x] Enviorment
 	- [x] NavMesh (carve)
 	- [x] Agent prefab
 	- [x] Mouse movement
 	- [x] Agent Selection
-- [ ] Crowd collision
+	
+- [x] Crowd collision
+- [ ] Text Response
+	- [ ] Describe your braking mechanism for agents.
+	- [ ] Describe a way for implementing how an agent can avoid obstacles without carving.
+	- [ ] Explain the difference in behavior between carving and non-carving options for a NavMeshObstacle. When and why should you use carving? What is the issue with making all obstacles carving? What is the issue with making all obstacles noncarving?
 - [ ] Extra credit
 	- [ ] Adversarial Agent
 	- [ ] Extract to graph [Yanshi]
