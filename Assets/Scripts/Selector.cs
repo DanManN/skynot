@@ -17,7 +17,7 @@ public class Selector : MonoBehaviour
     private bool isSelected(Transform tf)
     {
         // child 3 is line selector
-        return tf.Find("Selected").gameObject.active;
+        return tf.Find("Selected").gameObject.activeSelf;
     }
 
     private void setSelected(Transform tf, bool select)
@@ -45,7 +45,7 @@ public class Selector : MonoBehaviour
         }
 
 
-        if (xForm.CompareTag("Agent"))
+        if (xForm != null && xForm.CompareTag("Agent"))
         {
             transform.position = xForm.position + vert(4);
             transform.eulerAngles = rotDown;
@@ -82,7 +82,7 @@ public class Selector : MonoBehaviour
                     foreach (Transform child in agentParent.transform)
                     {
                         if (isSelected(child))
-                            child.GetComponent<ClickToMove>().Destination(xForm.gameObject.GetComponent<Collider>().ClosestPointOnBounds(point));
+                            child.GetComponent<ClickToMove>().setDestination(xForm.gameObject.GetComponent<Collider>().ClosestPointOnBounds(point));
                     }
                 }
             }

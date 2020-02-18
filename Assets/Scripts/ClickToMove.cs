@@ -12,11 +12,42 @@ public class ClickToMove : MonoBehaviour
     private bool move;
     private Vector3 hDest;
 
+    public void setMove(bool canMove)
+    {
+        move = canMove;
+    }
+
+    public bool canMove()
+    {
+        return move;
+    }
+
+    private bool canMove(GameObject go)
+    {
+        return go.GetComponent<ClickToMove>().canMove();
+    }
+
+    public void setDestination(Vector3 d)
+    {
+        agent.destination = d;
+        hDest = d - vert(d.y);
+        move = true;
+    }
+
+    public Vector3 getDestination()
+    {
+        return agent.destination;
+    }
+
+    private Vector3 getDestination(GameObject go)
+    {
+        return go.GetComponent<ClickToMove>().getDestination();
+    }
+
     void Start()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        move = true;
-        agent.destination = goal.position;
+        setDestination(goal.position);
         agent.enabled = true;
     }
 
@@ -30,16 +61,29 @@ public class ClickToMove : MonoBehaviour
 
         if (move)
         {
-            agent.enabled = true;
+            // agent.enabled = true;
             agent.isStopped = false;
+        }
+        else
+        {
+            // agent.enabled = false;
+            agent.isStopped = true;
         }
 
     }
 
-    public void Destination(Vector3 d)
+
+    void OnTriggerEnter(Collider coll)
     {
-        agent.destination = d;
-        hDest = d - vert(d.y);
-        move = true;
+        GameObject other = coll.gameObject;
+        // print(collider + ", " + other);
+        // print(other.GetComponent<ClickToMove>());
+        // if (canMove() && other.CompareTag("Agent"))
+            // print(getDestination(other) + ", " + getDestination() + ", " + !canMove(other));
+        if (canMove() && other.CompareTag("Agent") && getDestination(other) == getDestination() && !canMove(other))
+        {
+            move = false;
+        }
     }
+
 }
