@@ -55,7 +55,6 @@ public class MoveCamera : MonoBehaviour
 
             Quaternion rot = Quaternion.Euler(xAngle, yAngle, 0);
             Vector3 point = rot * Vector3.forward;
-            print(point.normalized);
             Vector3 pos = targetObj.transform.position - distance * point + yDisp * Vector3.up;
             transform.SetPositionAndRotation(pos, rot);
         }
