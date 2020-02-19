@@ -7,6 +7,8 @@ public class Selector : MonoBehaviour
 {
 
     public GameObject agentParent;
+    public GameObject axisAgentParent;
+    public float controlSpeed = 5;
 
     private Vector3 rotUp = new Vector3(90, 0, 0);
     private Vector3 rotDown = new Vector3(-90, 0, 0);
@@ -32,6 +34,16 @@ public class Selector : MonoBehaviour
         // selector.tag = "selector";
     }
 
+    void FixedUpdate()
+    {
+        Vector3 push = Input.GetAxis("Vertical") * forward() + Input.GetAxis("Horizontal") * right();
+        foreach (Transform child in axisAgentParent.transform)
+        {
+            if (isSelected(child))
+                child.position += push * Time.fixedDeltaTime * controlSpeed;
+        }
+    }
+
     void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -48,6 +60,11 @@ public class Selector : MonoBehaviour
         if (xForm != null && xForm.CompareTag("Agent"))
         {
             transform.position = xForm.position + vert(4);
+            transform.eulerAngles = rotDown;
+        }
+        else if (xForm != null && xForm.CompareTag("Mover"))
+        {
+            transform.position = xForm.position + vert(2);
             transform.eulerAngles = rotDown;
         }
         else
@@ -72,6 +89,17 @@ public class Selector : MonoBehaviour
                     else
                     {
                         foreach (Transform child in agentParent.transform)
+                        {
+                            setSelected(child, false);
+                        }
+                    }
+                    if (xForm.CompareTag("Mover"))
+                    {
+                        setSelected(xForm, true);
+                    }
+                    else
+                    {
+                        foreach (Transform child in axisAgentParent.transform)
                         {
                             setSelected(child, false);
                         }
