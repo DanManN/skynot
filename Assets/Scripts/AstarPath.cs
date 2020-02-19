@@ -40,27 +40,97 @@ public class AstarPath : MonoBehaviour
     }
 
     // Prototype for Astar; Transfer Vec3 to Node
+    
+    List<Vector3> reconstruct_path(List<Vector3> cameFrom, Vector3 current)
+    {
+        var total_path = current;
+        while (cameFrom.Contains(current))
+        {
+            current = cameFrom[current];
+            total_path.Add(current)
+        }
+        return total_path;
+    }
 
-    // void AstarSearch(Node Start, Node End)
-    // {
-    //     var prioQueue = new List<Node>();
-    //     prioQueue.Add(Start);
-    // }
+    // h is the heuristic function. h(n) estimates the cost to reach goal from node n.
+    float h(Vector3 node)
+    {
 
-    // List<Node> ReconstructPath(Node comefrom, Node current)
-    // {
-    //     var shortestPath = new List<Node>();
-    //     return shortestPath;
-    // }
+    }
 
-    // void BuildShortestPath(List<Node> list, Node node)
-    // {
+    boolean A_Star(Vector3 Start, Vector3 End)
+    {
+        var closeSet = new HashSet<Vector3>();
+        var openSet = new HashSet<Vector3>();
+        openSet.Add(Start);
+         // Map of Navigated Nodes
+        var cameFrom = new Dictionary<string, string>();
 
-    // }
+        var gScore = new Dictionary<string, string>();
+        foreach (Vector3 v in mesh.vertices) {
+            gScore.Add(v, double.PositiveInfinity);
+        }
+        gScore[Start] = 0;
 
-    // // For approximating straitline
-    // void SmoothPath()
-    // {
+        // For node n, fScore[n] := gScore[n] + h(n).
+        var fScore = new Dictionary<string, string>();
+        foreach (Vector3 v in mesh.vertices) {
+            fScore.Add(v, double.PositiveInfinity);
+        }
+        fScore[Start] = h(Start);
+
+        // openSet is not empty
+        while(openSet.Count() != 0 )
+        {
+            var minfScore = double.PositiveInfinity;
+            current = Start;
+            foreach (Vector3 node in openSet) {
+                if (fScore[node] <= minfScore)
+                {
+                    minfScore = fScore[node];
+                    current = node;
+                }
+            }
+
+            if(current == End)
+            {
+                return reconstruct_path(cameFrom, current);
+            }
+
+            openSet.Remove(current);
+            closeSet.Add(current);
+
+            foreach (Vector3 neighbor in current.neighbor) {
+                if (closeSet.Contains(neighbor))
+                {
+                    continue;
+                }
+                
+                // d is the weight of the edge from current to neighbor
+                // TODO d
+                // TODO neighbor
+                var tentative_gScore = gScore[current] + d(current, neighbor);
+                if (tentative_gScore < gScore[neighbor])
+                {
+                    // This path to neighbor is better than any previous one. Record it!
+                    cameFrom[neighbor] = current;
+                    gScore[neighbor] = tentative_gScore;
+                    fScore[neighbor] = gScore[neighbor] + h(neighbor);
+                    if (! (openSet.Contains(neighbor)))
+                    {
+                        openSet.Add(neighbor);
+                    }
+                }
+            }
         
-    // }
+        }
+
+        return false;
+    }
+
+    // For approximating straitline
+    void SmoothPath()
+    {
+        
+    }
 }
