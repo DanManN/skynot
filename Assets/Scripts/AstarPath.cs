@@ -6,16 +6,12 @@ using Common;
 public class AstarPath : MonoBehaviour
 {
     private UnityEngine.AI.NavMeshTriangulation triNavMesh;
-    // private Mesh mesh;
     public Map Map { get; set; }
     // Start is called before the first frame update
     void Start()
     {
-        // mesh = new Mesh();
-        // mesh.name = "ExportedNavMesh";
         triNavMesh = UnityEngine.AI.NavMesh.CalculateTriangulation();
         Map.fromNavMesh(triNavMesh);
-        // ExtractMesh();
         PrintMesh();
     }
 
@@ -25,15 +21,6 @@ public class AstarPath : MonoBehaviour
         
     }
 
-    // void ExtractMesh()
-    // {
-    //     // meshTri.CalculateTriangulation();
-    //     // G = <V, E>
-    //     mesh.vertices = triNavMesh.vertices;
-    //     mesh.triangles = triNavMesh.indices;
-    //     // Debug.Log(mesh.triangles);
-    //     // Debug.Log(mesh.vertices);
-    // }
 
     void PrintMesh()
     {
@@ -51,98 +38,103 @@ public class AstarPath : MonoBehaviour
         }
     }
 
-    // // Prototype for Astar; Transfer Vec3 to Node
+    // Prototype for Astar; Transfer Vec3 to Node
     
-    // List<Vector3> reconstruct_path(Dictionary<Vector3, float> cameFrom, Vector3 current)
-    // {
-    //     var total_path = current;
-    //     while (cameFrom.Contains(current))
-    //     {
-    //         current = cameFrom[current];
-    //         total_path.Add(current);
-    //     }
-    //     return total_path;
-    // }
+    List<Node> reconstruct_path(Dictionary<Node, Node> cameFrom, Node current)
+    {
+        var total_path = new List<Node>();
+        total_path.Add(current);
 
-    // // h is the heuristic function. h(n) estimates the cost to reach goal from node n.
-    // float h(Vector3 node)
-    // {
+        while (cameFrom.ContainsKey(current))
+        {
+            current = cameFrom[current];
+            total_path.Insert(0, current); // TODO: prepend in Wiki but Add in course note?
+        }
+        return total_path;
+    }
 
-    // }
+    // h is the heuristic function. h(n) estimates the cost to reach goal from node n.
+    double h(Node node)
+    {
+        // TODO
+        return 1;
+    }
 
-    // bool A_Star(Vector3 Start, Vector3 End)
-    // {
-    //     var closeSet = new HashSet<Vector3>();
-    //     var openSet = new HashSet<Vector3>();
-    //     openSet.Add(Start);
-    //      // Map of Navigated Nodes
-    //     var cameFrom = new Dictionary<Vector3, float>();
+    List<Node> A_Star(Node Start, Node End)
+    {
+        var closeSet = new HashSet<Node>();
+        var openSet = new HashSet<Node>();
+        openSet.Add(Start);
+         // Map of Navigated Nodes
+        var cameFrom = new Dictionary<Node, Node>();
 
-    //     var gScore = new Dictionary<Vector3, float>();
-    //     foreach (Vector3 v in mesh.vertices) {
-    //         gScore.Add(v, double.PositiveInfinity);
-    //     }
-    //     gScore[Start] = 0;
+        var gScore = new Dictionary<Node, double>();
+        foreach (Node v in Map.Nodes) {
+            gScore.Add(v, double.PositiveInfinity);
+        }
+        gScore[Start] = 0;
 
-    //     // For node n, fScore[n] := gScore[n] + h(n).
-    //     var fScore = new Dictionary<Vector3, float>();
-    //     foreach (Vector3 v in mesh.vertices) {
-    //         fScore.Add(v, double.PositiveInfinity);
-    //     }
-    //     fScore[Start] = h(Start);
+        // For node n, fScore[n] := gScore[n] + h(n).
+        var fScore = new Dictionary<Node, double>();
+        foreach (Node v in Map.Nodes) {
+            fScore.Add(v, double.PositiveInfinity);
+        }
+        fScore[Start] = h(Start);
 
-    //     // openSet is not empty
-    //     while(openSet.Count() != 0 )
-    //     {
-    //         var minfScore = double.PositiveInfinity;
-    //         var current = Start;
-    //         foreach (Vector3 node in openSet) {
-    //             if (fScore[node] <= minfScore)
-    //             {
-    //                 minfScore = fScore[node];
-    //                 current = node;
-    //             }
-    //         }
+        // openSet is not empty
+        while(openSet.Count != 0 )
+        {
+            var minfScore = double.PositiveInfinity;
+            var current = Start;
+            foreach (Node node in openSet) {
+                if (fScore[node] <= minfScore)
+                {
+                    minfScore = fScore[node];
+                    current = node;
+                }
+            }
 
-    //         if(current == End)
-    //         {
-    //             return reconstruct_path(cameFrom, current);
-    //         }
+            if(current == End)
+            {
+                return reconstruct_path(cameFrom, current);
+            }
 
-    //         openSet.Remove(current);
-    //         closeSet.Add(current);
-
-    //         foreach (Vector3 neighbor in current.neighbor) {
-    //             if (closeSet.Contains(neighbor))
-    //             {
-    //                 continue;
-    //             }
+            openSet.Remove(current);
+            closeSet.Add(current);
+            foreach (var cnn in current.Connections) {
+                Node neighbor = cnn.ConnectedNode;
+                var weight = cnn.Cost;
+                if (closeSet.Contains(neighbor))
+                {
+                    continue;
+                }
                 
-    //             // d is the weight of the edge from current to neighbor
-    //             // TODO d
-    //             // TODO neighbor
-    //             var tentative_gScore = gScore[current] + d(current, neighbor);
-    //             if (tentative_gScore < gScore[neighbor])
-    //             {
-    //                 // This path to neighbor is better than any previous one. Record it!
-    //                 cameFrom[neighbor] = current;
-    //                 gScore[neighbor] = tentative_gScore;
-    //                 fScore[neighbor] = gScore[neighbor] + h(neighbor);
-    //                 if (! (openSet.Contains(neighbor)))
-    //                 {
-    //                     openSet.Add(neighbor);
-    //                 }
-    //             }
-    //         }
+                // d is the weight of the edge from current to neighbor
+                var tentative_gScore = gScore[current] + weight;
+                // var tentative_gScore = gScore[current] + d(current, neighbor);
+                if (tentative_gScore < gScore[neighbor])
+                {
+                    // This path to neighbor is better than any previous one. Record it!
+                    cameFrom[neighbor] = current;
+                    gScore[neighbor] = tentative_gScore;
+                    fScore[neighbor] = gScore[neighbor] + h(neighbor);
+                    if (! (openSet.Contains(neighbor)))
+                    {
+                        openSet.Add(neighbor);
+                    }
+                }
+            }
         
-    //     }
+        }
 
-    //     return false;
-    // }
+        // FAILURE!
+        // return false;
+        return new List<Node>();
+    }
 
-    // // For approximating straitline
-    // void SmoothPath()
-    // {
+    // For approximating straitline
+    void SmoothPath()
+    {
         
-    // }
+    }
 }
