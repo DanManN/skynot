@@ -35,6 +35,13 @@ triNavMesh.vertices // 362: unique indices
 
 3. A_Star
 
+   Prototype from [Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
+
+   - [ ] Duplicate StartNode, EndNode, ShortestPath in Map and AstarPath
+   - [ ] heuristic function
+   - [ ] Test
+   
+
 4. As straight as possible: smoothing?
 
 5. Points in triangle
