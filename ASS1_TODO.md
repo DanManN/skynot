@@ -13,3 +13,28 @@
 - [ ] Extra credit
 	- [ ] Adversarial Agent
 	- [ ] Extract to graph [Yanshi]
+
+
+
+## A* path finding
+
+1. Extract NavMesh to Graphs
+
+```
+UnityEngine.AI.NavMeshTriangulation triNavMesh;
+triNavMesh = UnityEngine.AI.NavMesh.CalculateTriangulation();
+
+triNavMesh.areas // 156: 0, 1, 2, 3, 4 as set
+triNavMesh.indices // indices to draw a triangle 468: 468 / 3 = 156
+triNavMesh.vertices // 362: unique indices
+```
+
+2. Graph Map
+
+   Borrow and modify from https://github.com/jpinsonault/monograph map.cs
+
+3. A_Star
+
+4. As straight as possible: smoothing?
+
+5. Points in triangle

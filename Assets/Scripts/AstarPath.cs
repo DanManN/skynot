@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Common;
 
 public class AstarPath : MonoBehaviour
 {
     private UnityEngine.AI.NavMeshTriangulation triNavMesh;
-    private Mesh mesh;
+    // private Mesh mesh;
+    public Map Map { get; set; }
     // Start is called before the first frame update
     void Start()
     {
-        mesh = new Mesh();
-        mesh.name = "ExportedNavMesh";
+        // mesh = new Mesh();
+        // mesh.name = "ExportedNavMesh";
         triNavMesh = UnityEngine.AI.NavMesh.CalculateTriangulation();
-        ExtractMesh();
+        Map.fromNavMesh(triNavMesh);
+        // ExtractMesh();
+        PrintMesh();
     }
 
     // Update is called once per frame
@@ -21,28 +25,27 @@ public class AstarPath : MonoBehaviour
         
     }
 
-    void ExtractMesh()
-    {
-        // meshTri.CalculateTriangulation();
-        // G = <V, E>
-        mesh.vertices = triNavMesh.vertices;
-        mesh.triangles = triNavMesh.indices;
-        PrintMesh();
-        // Debug.Log(mesh.triangles);
-        // Debug.Log(mesh.vertices);
-    }
+    // void ExtractMesh()
+    // {
+    //     // meshTri.CalculateTriangulation();
+    //     // G = <V, E>
+    //     mesh.vertices = triNavMesh.vertices;
+    //     mesh.triangles = triNavMesh.indices;
+    //     // Debug.Log(mesh.triangles);
+    //     // Debug.Log(mesh.vertices);
+    // }
 
     void PrintMesh()
     {
         Debug.Log("Areas: " + triNavMesh.areas.Length); // 156
-        Debug.Log("Indices: " + triNavMesh.indices.Length); // 468
+        Debug.Log("Indices: " + triNavMesh.indices.Length); // 468: 468/3 = 156
         Debug.Log("Vertices: " + triNavMesh.vertices.Length); // 362
-        // foreach (int a in triNavMesh.areas) {
-        //     Debug.Log(string.Format("a {0}\n",a));
-        // }
-        // foreach (int ind in triNavMesh.indices) {
-        //     Debug.Log(string.Format("ind {0}\n", ind));
-        // }
+        foreach (int a in triNavMesh.areas) {
+            Debug.Log(string.Format("a {0}\n",a));
+        }
+        foreach (int ind in triNavMesh.indices) {
+            Debug.Log(string.Format("{0}\t", ind));
+        }
         foreach (Vector3 v in triNavMesh.vertices) {
             Debug.Log(string.Format("v {0} {1} {2}\n",v.x,v.y,v.z));
         }
