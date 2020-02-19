@@ -53,10 +53,8 @@ namespace Common
                 var vec = triNavMesh.vertices[i];
                 var newNode = Node.New(vec, i, i.ToString());
                 map.Nodes.Add(newNode);
-                // if (!newNode.ToCloseToAny(map.Nodes))
-                //     map.Nodes.Add(newNode);
             }
-            // Add Connections
+            // Add Connections among triangles
             for (int i = 0; i < triNavMesh.indices.Length; i = i + 3)
             {
                 var triangle = new List<Node>();
@@ -66,11 +64,15 @@ namespace Common
                 triangle.Add(A);
                 triangle.Add(B);
                 triangle.Add(C);
-                A.Connect(triangle, 0);
-                B.Connect(triangle, 0);
-                C.Connect(triangle, 0);
-                // if (!newNode.ToCloseToAny(map.Nodes))
-                //     map.Nodes.Add(newNode);
+
+                int areaI = (int)Math.Floor(i/3.0);
+                var area_indicator = triNavMesh.areas[areaI];
+                // Cost from Unity
+                float cost = UnityEngine.AI.NavMesh.GetAreaCost(area_indicator);
+                A.Connect(triangle, cost);
+                B.Connect(triangle, cost);
+                C.Connect(triangle, cost);
+
             }
 
             // Debug Line
@@ -137,10 +139,10 @@ namespace Common
         //         Name = name
         //     };
         // }
-        internal void Connect(List<Node> nodes, float weight)
+        internal void Connect(List<Node> triangle, float weight)
         {
             var connections = new List<Edge>();
-            foreach (var node in nodes)
+            foreach (var node in triangle)
             {
                 if (node.Id == this.Id)
                     continue;
@@ -168,8 +170,6 @@ namespace Common
                     var backConnection = new Edge { ConnectedNode = this, Length = cnn.Length };
                     cnn.ConnectedNode.Connections.Add(backConnection);
                 }
-                // if (count == branching)
-                //     return;
             }
         }
 
@@ -239,7 +239,7 @@ namespace Common
 
         public override string ToString()
         {
-            return "-> " + ConnectedNode.ToString();
+            return "-> " + ConnectedNode.ToString() + " (cost: " + Cost.ToString() + ")";
         }
     }
 
