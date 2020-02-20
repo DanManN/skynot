@@ -12,6 +12,11 @@ public class ClickToMove : MonoBehaviour
     private bool move;
     private Vector3 hDest;
 
+    public GameObject enemy = null;
+    public float runDist = 4.0f;
+    private Vector3 realDest;
+    private bool changed = false;
+
     public void setMove(bool canMove)
     {
         move = canMove;
@@ -54,15 +59,48 @@ public class ClickToMove : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 hTrans = transform.position - vert(transform.position.y);
+
+        float enemyDist = 100000000000;
+        if (enemy != null)
+        {
+            enemyDist = Vector3.Distance(transform.position, enemy.transform.position);
+        }
+        
+
         if ((hDest - hTrans).sqrMagnitude <= pow2(agent.stoppingDistance))
         {
             move = false;
         }
 
+        if (enemyDist < runDist)
+        {
+            Vector3 dirToEnemy = transform.position - enemy.transform.position;
+            Vector3 newPos = transform.position + dirToEnemy * 3.0f;
+            if (!changed)
+            {
+                realDest = getDestination();
+                setDestination(newPos);
+                changed = true;
+            }
+
+            agent.isStopped = false;
+
+            print("real dest: ");
+            print(realDest);
+        }
+        else if (changed)
+        {
+            setDestination(realDest);
+            changed = false;
+        }
+
+
         if (move)
         {
             // agent.enabled = true;
             agent.isStopped = false;
+
+
         }
         else
         {
