@@ -33,3 +33,6 @@ Issue with all obstacles carving: It is not an elegant behavior. Dynamically rec
 
 Issue of non-carving: Agent got stuck when moving obstacles become stationary. 
 
+## Extra Credit Attempts
+
+* Our adversarial agent is a cube that can be moved in the same manner (Left Control + Click to select, Click to set goal) as the agents.  If any of the agents get within a specified radius of the adversary, they will get a new temporary goal in the opposite direction from the adversary.  Once they have moved clear of the radius around the adversary, they will resume towards their original goal.
