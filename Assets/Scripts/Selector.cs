@@ -18,14 +18,12 @@ public class Selector : MonoBehaviour
 
     private bool isSelected(Transform tf)
     {
-        // child 3 is line selector
         return tf.Find("Selected").gameObject.activeSelf;
     }
 
-    private void setSelected(Transform tf, bool select)
+    private void setSelected(Transform tf, bool sel)
     {
-        // child 3 is line selector
-        tf.Find("Selected").gameObject.SetActive(select);
+        tf.Find("Selected").gameObject.SetActive(sel);
     }
 
     void Start()
@@ -57,14 +55,9 @@ public class Selector : MonoBehaviour
         }
 
 
-        if (xForm != null && xForm.CompareTag("Agent"))
+        if (xForm != null && (xForm.CompareTag("Agent")))
         {
             transform.position = xForm.position + vert(4);
-            transform.eulerAngles = rotDown;
-        }
-        else if (xForm != null && xForm.CompareTag("Mover"))
-        {
-            transform.position = xForm.position + vert(2);
             transform.eulerAngles = rotDown;
         }
         else
