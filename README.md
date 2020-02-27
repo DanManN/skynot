@@ -1,8 +1,15 @@
 ## Report
 
+# Controls
+* Left Control + Click to select agents or obstacles
+* Click to set goal for selected agents or use arrow keys to move obstacles
+* Camera: wasd for movement along axes, hjkl to tilt and pan, scroll to zoom
+
 ## Response to 5. 
 
-- [ ] Braking mechanism for agents** 4.)
+a. Braking mechanism for agents
+
+We do a simple propogation with trigger colliders to see if agent is touching an agent that is finished moving.
 
 b. Implementing agent avoid obstacles without carving
 
