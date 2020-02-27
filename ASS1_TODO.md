@@ -4,8 +4,8 @@
 	- [x] Agent prefab
 	- [x] Mouse movement
 	- [x] Agent Selection
-	
 - [x] Crowd collision
+- [ ] Moving obstacles: Yanshi working on ...
 - [ ] Text Response
 	- [ ] Describe your braking mechanism for agents.
 	- [ ] Describe a way for implementing how an agent can avoid obstacles without carving.
@@ -41,7 +41,6 @@ triNavMesh.vertices // 362: unique indices
    - [ ] heuristic function
    - [ ] Test
    
-
 4. As straight as possible: smoothing?
 
 5. Points in triangle
