@@ -65,7 +65,6 @@ public class ClickToMove : MonoBehaviour
         {
             enemyDist = Vector3.Distance(transform.position, enemy.transform.position);
         }
-        
 
         if ((hDest - hTrans).sqrMagnitude <= pow2(agent.stoppingDistance))
         {
@@ -85,8 +84,8 @@ public class ClickToMove : MonoBehaviour
 
             agent.isStopped = false;
 
-            print("real dest: ");
-            print(realDest);
+            // print("real dest: ");
+            // print(realDest);
         }
         else if (changed)
         {
@@ -117,7 +116,7 @@ public class ClickToMove : MonoBehaviour
         // print(collider + ", " + other);
         // print(other.GetComponent<ClickToMove>());
         // if (canMove() && other.CompareTag("Agent"))
-            // print(getDestination(other) + ", " + getDestination() + ", " + !canMove(other));
+        // print(getDestination(other) + ", " + getDestination() + ", " + !canMove(other));
         if (canMove() && other.CompareTag("Agent") && getDestination(other) == getDestination() && !canMove(other))
         {
             move = false;
