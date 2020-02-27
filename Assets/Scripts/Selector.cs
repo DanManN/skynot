@@ -55,7 +55,7 @@ public class Selector : MonoBehaviour
         }
 
 
-        if (xForm != null && (xForm.CompareTag("Agent")))
+        if (xForm != null && (xForm.CompareTag("Agent") || xForm.CompareTag("Mover")))
         {
             transform.position = xForm.position + vert(4);
             transform.eulerAngles = rotDown;
@@ -75,7 +75,7 @@ public class Selector : MonoBehaviour
             {
                 if (Input.GetAxis("Ctrl") > 0)
                 {
-                    if (xForm.CompareTag("Agent"))
+                    if (xForm.CompareTag("Agent") || xForm.CompareTag("Mover"))
                     {
                         setSelected(xForm, true);
                     }
@@ -86,7 +86,7 @@ public class Selector : MonoBehaviour
                             setSelected(child, false);
                         }
                     }
-                    if (xForm.CompareTag("Mover"))
+                    /*if (xForm.CompareTag("Mover"))
                     {
                         setSelected(xForm, true);
                     }
@@ -96,7 +96,7 @@ public class Selector : MonoBehaviour
                         {
                             setSelected(child, false);
                         }
-                    }
+                    }*/
                 }
                 else
                 {
