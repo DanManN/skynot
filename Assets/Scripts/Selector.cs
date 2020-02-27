@@ -86,7 +86,7 @@ public class Selector : MonoBehaviour
                             setSelected(child, false);
                         }
                     }
-                    /*if (xForm.CompareTag("Mover"))
+                    if (xForm.CompareTag("Mover"))
                     {
                         setSelected(xForm, true);
                     }
@@ -96,7 +96,7 @@ public class Selector : MonoBehaviour
                         {
                             setSelected(child, false);
                         }
-                    }*/
+                    }
                 }
                 else
                 {
