@@ -1,0 +1,41 @@
+d911dfa was Yanshi Luo, 50 seconds ago, message: Update Report
+2b302bd was Yanshi Luo, 22 minutes ago, message: Update Report
+0c82934 was ashdunn, 5 hours ago, message: Merge branch 'master' of https://github.com/DanManN/skynot
+795de68 was ashdunn, 5 hours ago, message: fixed position of bar on adversary and movers
+c4c2d0b was ashdunn, 5 hours ago, message: Update README.md
+7f0c026 was ashdunn, 6 hours ago, message: fixed mover object and adversary selection and movement
+379388a was Daniel Nakhimovich, 16 hours ago, message: Update README.md
+c630953 was Daniel Nakhimovich, 16 hours ago, message: Update README.md
+b327314 was Daniel Nakhimovich, 16 hours ago, message: merge
+901ff0d was Daniel Nakhimovich, 17 hours ago, message: silence prints
+cccf91f was Daniel Nakhimovich, 17 hours ago, message: fixed selection
+f484075 was Yanshi Luo, 17 hours ago, message: Update Automoving obstacle
+2094679 was Yanshi Luo, 18 hours ago, message: Update NavMeshExample.unity
+27d8bd7 was Yanshi Luo, 18 hours ago, message: Update Dynamic NavMesh
+42790e5 was Yanshi Luo, 20 hours ago, message: Update report
+ac37f87 was Yanshi Luo, 20 hours ago, message: Change position and speed of adversarial agent
+a3a440c was ashdunn, 7 days ago, message: better position
+bf4680d was ashdunn, 7 days ago, message: adversary agent slighlty twitchy
+59be7f0 was Yanshi Luo, 8 days ago, message: Update TODO and remove redundancy
+a1a8206 was Yanshi Luo, 8 days ago, message: Wiki Algorithm Implemented
+5f210db was Yanshi Luo, 8 days ago, message: Update Map. Get Cost from Unity
+81960b3 was Yanshi Luo, 8 days ago, message: Update Map.cs
+c7cdf17 was Yanshi Luo, 8 days ago, message: update ExtractGraph
+c324b37 was Yanshi Luo, 8 days ago, message: Update AstarPath.cs
+b8c408a was Daniel Nakhimovich, 9 days ago, message: camera -> hjkl; cylinders -> arrows
+d726518 was Yanshi Luo, 9 days ago, message: Corresponding Object for AstarPaht
+1342444 was Yanshi Luo, 9 days ago, message: create AstarPath.cs, Extract Graph
+7c6974f was Daniel Nakhimovich, 10 days ago, message: Update ASS1_TODO.md
+0f8546d was Daniel Nakhimovich, 10 days ago, message: crowd collision
+47f64bd was Daniel Nakhimovich, 10 days ago, message: background
+3443081 was Daniel Nakhimovich, 10 days ago, message: Update ASS1_TODO.md
+9401cdf was Daniel Nakhimovich, 10 days ago, message: multi-select
+417afbb was Daniel Nakhimovich, 10 days ago, message: scaled and beautified
+1117f81 was ashdunn, 10 days ago, message: added navmesh
+65ffccf was ashdunn, 10 days ago, message: Merge branch 'master' of https://github.com/DanManN/skynot
+54f3ca5 was ashdunn, 10 days ago, message: base scene and agents
+d37f6b5 was Yanshi Luo, 10 days ago, message: Create ASS1_TODO.md
+8dd4294 was Daniel Nakhimovich, 10 days ago, message: fun agent asset and basic scene
+31efcb1 was Daniel Nakhimovich, 2 weeks ago, message: camera movement
+b48d1df was Daniel Nakhimovich, 2 weeks ago, message: camera movement
+f40abe9 was Daniel Nakhimovich, 2 weeks ago, message: first
