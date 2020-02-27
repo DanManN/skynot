@@ -1,9 +1,38 @@
 # Report
 
+## Implementation Notes
+
+- [ ] Git Log: See log.txt
+
+* Crowd Simulator
+
+  * [x] Select Agent with left click: (**Modification for multi-selection and partial selection**: Our selection is using **Left Control + Click** to select multiple agents or obstacles)
+  * [x] Agenet Navigate using mouse's right click: (**Modification**: Our navigation is, when there are agents being selected, using **Mouse Click** to navigate desired position)
+  * [x] Obstacle Movement: Green obstacle will move automatically, **purple** obstacle is moved by **selected by Left Ctrl + Click** and **moved by Arrow Key**.
+  * [x] Camera Control: WASD, Space (Higher) and Shift (Lower), and JKL to tilt and pan, Mouse scroll to zoom
+
+* Environment Elements
+
+  ![](./scene.png)
+
+  * Using Stairs to connect the disjoint levels, with stairs set as off-mesh links
+  * Left Bottom room is the simple maze with bottleneck areas
+  * Different obstacles:
+    * **Purple**: NavMesh Obstacle, controllable with **Left Ctrl + Click** to multi-select and use **arrow key** to move
+    * **Green**: NavMesh Obstacle which is moving automatically along specific waypoints
+
+- [x] Bake a NavMesh: We changed our method from the normal static baking to [Dynamic NavMesh baking]( https://github.com/Unity-Technologies/NavMeshComponents). It support building NavMesh dynamically during runtime, so that the cut-mesh of the moving obstacle is updated. ![](./NavMesh.png)
+- [x] Dynamic Obstacles: Green rectangular are moving without controls.
+- [x] Weighted Planes: 
+  * Red: Rough Plane to get avoid of
+  * Green: Preferred smooth plane
+  * Brown: Normal walkable area
+
 ## Controls
-* Left Control + Click to select agents or obstacles
-* Click to set goal for selected agents or use arrow keys to move obstacles
-* Camera: wasd for movement along axes, hjkl to tilt and pan, scroll to zoom
+
+* For Agent: Left Control + Click to select agents (Red capsule or Orange hexagon (the adversarial agent)), and then left click on the map to direct to goal position (Default is the coin on the bottom right corner)
+* For Obstacles: Left Control + Click to select purple obstacles, and the use arrow keys to move
+* For Camera: WASD, Space (Higher) and Shift (Lower), and JKL to tilt and pan, Mouse scroll to zoom
 
 ## Response to 5. 
 
@@ -12,8 +41,6 @@ a. Braking mechanism for agents
 We do a simple propogation with trigger colliders to see if agent is touching an agent that is finished moving.
 
 b. Implementing agent avoid obstacles without carving
-
-![image-20200226212438643](C:\Users\kdrob\AppData\Roaming\Typora\typora-user-images\image-20200226212438643.png)
 
 * Current solution: **Dynamic baking** a NavMesh: https://github.com/Unity-Technologies/NavMeshComponents
 * Note that using 2019.1, to use the extension, we should switch to corresponding branch of specific version
@@ -35,4 +62,10 @@ Issue of non-carving: Agent got stuck when moving obstacles become stationary.
 
 ## Extra Credit Attempts
 
-* Our adversarial agent is a cube that can be moved in the same manner (Left Control + Click to select, Click to set goal) as the agents.  If any of the agents get within a specified radius of the adversary, they will get a new temporary goal in the opposite direction from the adversary.  Once they have moved clear of the radius around the adversary, they will resume towards their original goal.
+1. **Orange hexagon in the image.** Our adversarial agent is a **cube** that can be moved in the same manner (**Left Control + Click to select, Click to set goal**) as the agents.  If any of the agents get within a specified radius of the adversary, they will get a new temporary goal in the opposite direction from the adversary.  Once they have moved clear of the radius around the adversary, they will resume towards their original goal.
+2. Try on extract credit 2
+
+- [x] Extract the Navigation Mesh to graph (Script/AstarPath.cs)![](Mesh2Graph.png)
+- [x] A* on Graph (Script/AstarPath.cs)
+- [ ] But didn't implement visualization in the project because it indeed will take too much effect
+
