@@ -1,6 +1,6 @@
-## Report
+# Report
 
-# Controls
+## Controls
 * Left Control + Click to select agents or obstacles
 * Click to set goal for selected agents or use arrow keys to move obstacles
 * Camera: wasd for movement along axes, hjkl to tilt and pan, scroll to zoom
